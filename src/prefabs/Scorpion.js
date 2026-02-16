@@ -7,13 +7,15 @@ class Scorpion extends Phaser.Physics.Arcade.Sprite{
         this.scorpionVelocity = -200
         this.setVelocityX(this.scorpionVelocity)
 
-        scene.anims.create({
+        if(!scene.anims.exists('scorpion')){
+            scene.anims.create({
                 key: 'scorpion',
-                frames: scene.anims.generateFrameNumbers('scorp', { start: 0, end: 2 }),
+                frames: scene.anims.generateFrameNumbers('scorp', { start: 0, end: 1 }),
                 frameRate: 10,
                 repeat: -1
             })
-            this.play('scorpion')
+        }
+        this.play('scorpion')
     }
 
 }

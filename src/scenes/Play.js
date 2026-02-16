@@ -8,12 +8,18 @@ class Play extends Phaser.Scene{
         this.load.image('mountain', './assets/CB_Mtn.png')
         this.load.image('road', './assets/Desert_Road.png?' + Date.now())
         this.load.image('punk', './assets/Punk.png')
+        this.load.image('cactus','./assets/Saguatilo.png')
         this.load.spritesheet('walk','./assets/Punk_Walk.png',{
             frameWidth: 600,
             frameHeight: 800
         })
         this.load.spritesheet('scorp','./assets/Scorpion.png',{
             frameWidth: 100,
+            frameHeight: 100
+        })
+
+        this.load.spritesheet('lizard','./assets/LizardSS.png',{
+            frameWidth: 75,
             frameHeight: 100
         })
     }
@@ -39,6 +45,14 @@ class Play extends Phaser.Scene{
         //temp adding scorp to test
         this.scorpion = new Scorpion(this,640,400,'scorp')
         this.scorpion.setScale(0.6).setDepth(3)
+
+        //temp adding lizard to test
+        this.lizard = new Lizard(this,640,400,'lizard')
+        this.lizard.setScale(0.6).setDepth(3)
+
+        //temp adding cactus to test
+        this.cactus = new Cactus(this,640,400,'cactus')
+        this.cactus.setDepth(3)
 
         //keyboard set-up
         this.keys = this.input.keyboard.createCursorKeys()
