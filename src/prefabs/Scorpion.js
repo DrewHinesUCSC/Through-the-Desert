@@ -4,9 +4,6 @@ class Scorpion extends Phaser.Physics.Arcade.Sprite{
         scene.add.existing(this)
         scene.physics.add.existing(this)
 
-        this.scorpionVelocity = -200
-        this.setVelocityX(this.scorpionVelocity)
-
         if(!scene.anims.exists('scorpion')){
             scene.anims.create({
                 key: 'scorpion',

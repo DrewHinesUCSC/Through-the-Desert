@@ -4,9 +4,6 @@ class Lizard extends Phaser.Physics.Arcade.Sprite{
         scene.add.existing(this)
         scene.physics.add.existing(this)
 
-        this.lizardVelocity = -200
-        this.setVelocityX(this.lizardVelocity)
-
         if(!scene.anims.exists('liz_walk')){
             scene.anims.create({
                 key: 'liz_walk',

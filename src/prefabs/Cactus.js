@@ -3,8 +3,5 @@ class Cactus extends Phaser.Physics.Arcade.Sprite{
         super(scene, x, y, texture, frame)
         scene.add.existing(this)
         scene.physics.add.existing(this)
-
-        this.cactusVelocity = -200
-        this.setVelocityX(this.cactusVelocity)
     }
 }

@@ -5,6 +5,11 @@ class Punk extends Phaser.Physics.Arcade.Sprite{
         super(scene, x, y, texture, frame)
         scene.add.existing(this)
         scene.physics.add.existing(this)
+        
+        // Set smaller hitbox (adjust these numbers as needed)
+        this.body.setSize(100, 150)
+        this.body.setOffset(250, 300)
+        
         //this.setCollideWorldBounds(true)
         this.boundsWidth = 640
         this.boundsHeight = 150
