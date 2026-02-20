@@ -18,6 +18,7 @@ class Menu extends Phaser.Scene{
         this.load.audio('Score2','./assets/Score2.wav')
         this.load.audio('Score3','./assets/Score3.wav')
         this.load.audio('Hit','./assets/Punk_Hit.wav')
+        this.load.audio('steps','./assets/Steps.wav')
     }
 
     create(){
@@ -30,10 +31,14 @@ class Menu extends Phaser.Scene{
 
         this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
         //this.scene.start("playScene")
+        this.CKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C)
     }
     update(){
         if(Phaser.Input.Keyboard.JustDown(this.keySpace)){
             this.scene.start('playScene')
+        }
+        if(Phaser.Input.Keyboard.JustDown(this.CKey)){
+            this.scene.start('creditsScene')
         }
     }
 }

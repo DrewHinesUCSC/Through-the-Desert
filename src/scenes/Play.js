@@ -42,6 +42,15 @@ class Play extends Phaser.Scene{
         this.punk_char = new Punk(this, this.game.config.width/8, 380, 'walk')
         this.punk_char.setScale(0.25).setDepth(3)
 
+        //adding footstep sounds
+        this.stepsSFX = this.sound.add('steps',{
+            loop: true,
+            volume: 0.5
+        })
+        this.events.on('shutdown', ()=>{
+            this.stepsSFX.stop()
+        })
+
         //Creating groups for objects to be able to respawn
         this.scorpionGroup = this.add.group({
             runChildUpdate: true
@@ -115,7 +124,7 @@ class Play extends Phaser.Scene{
         }
         else{
             let cactus = new Cactus(this,640,randomY,'cactus')
-            cactus.setScale(0.8).setDepth(3)
+            cactus.setDepth(3)
             cactus.setVelocityX(-this.obstacleSpeed)
             this.cactusGroup.add(cactus)
         }
@@ -174,12 +183,18 @@ class Play extends Phaser.Scene{
             obstacle.destroy()
             this.sound.play('Hit')
             this.obstacleActive = false
+            //changing color temporarily on hit
+            this.punk_char.setTint(0xf00000)
+            this.time.delayedCall(300, ()=>{
+                this.punk_char.clearTint()
+            })
 
             this.lives--
             this.livesText.setText('Lives: ' + this.lives)
 
             if(this.lives <= 0){
                 this.gameOver = true
+                this.stepsSFX.stop()
                 this.gameOverScreen()
             }else{
                 this.spawnObstacle()
@@ -205,9 +220,19 @@ class Play extends Phaser.Scene{
             fill: '#fff'
         }).setOrigin(0.5).setDepth(12)
 
+        this.add.text(320,360,'Press "M" for Menu',{
+            fontSize: '24px',
+            fill: '#fff'
+        }).setOrigin(0.5).setDepth(12)
+
         this.input.keyboard.once('keydown-SPACE',() => {
             this.scene.restart()
         })
+        this.input.keyboard.once('keydown-M',() => {
+            this.sound.stopAll()
+            this.scene.start('menuScene')
+        })
+        
     }
 
     playRandomScore(){

@@ -8,7 +8,7 @@ class Punk extends Phaser.Physics.Arcade.Sprite{
         
         // Set smaller hitbox (adjust these numbers as needed)
         this.body.setSize(100, 150)
-        this.body.setOffset(250, 300)
+        this.body.setOffset(250, 200)
         
         //this.setCollideWorldBounds(true)
         this.boundsWidth = 640
@@ -48,6 +48,9 @@ class IdleState extends State{
     enter(scene, punk){
         punk.setVelocity(0)
         punk.anims.play('walking')
+        if(scene.stepsSFX?.isPlaying){
+            scene.stepsSFX.stop()
+        }
     }
     execute(scene, punk){
         const {left, right, up, down} = scene.keys
@@ -61,6 +64,11 @@ class IdleState extends State{
 }
 
 class MoveState extends State{
+    enter(scene, punk){
+        if(scene.stepsSFX && !scene.stepsSFX.isPlaying){
+            scene.stepsSFX.play()
+        }
+    }
     execute(scene, punk){
         const {left, right, up, down } = scene.keys
         const HKey = scene.keys.HKey
